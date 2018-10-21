@@ -13,4 +13,4 @@ COPY outfitter_scraper outfitter_scraper
 COPY scrapy.cfg .
 
 # Run all of the scrapers
-CMD scrapy list | xargs -P 4 -n 1 scrapy crawl
+CMD scrapy list | xargs -P 0 -n 1 scrapy crawl
