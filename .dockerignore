@@ -122,4 +122,5 @@ dmypy.json
 .gitignore
 
 # Docker
+.dockerignore
 docker-compose.yml
