@@ -14,6 +14,9 @@ class TillysSpider(CrawlSpider):
             callback='parse_catalog_page', follow=True),
     )
 
+    def parse_start_url(self, response):
+        return self.parse_catalog_page(response)
+
     def parse_catalog_page(self, response):
         # extract clothing type from response url
         clothing_match = re.search(r'clothing/(.+)/', response.url)
@@ -24,6 +27,7 @@ class TillysSpider(CrawlSpider):
         img_urls = selected_urls.extract()
 
         return {
+            'page_url': response.url,
             'clothing': clothing,
             'img_urls': img_urls
         }
