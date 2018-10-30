@@ -11,10 +11,10 @@ class TillysSpider(CrawlSpider):
     rules = (
         Rule(LinkExtractor(
             restrict_css='.search-options-container .first-last > .page-next'),
-            callback='parse_img_urls', follow=True),
+            callback='parse_catalog_page', follow=True),
     )
 
-    def parse_img_urls(self, response):
+    def parse_catalog_page(self, response):
         # extract clothing type from response url
         clothing_match = re.search(r'clothing/(.+)/', response.url)
         clothing = clothing_match.group(1) if clothing_match else 'unknown'
