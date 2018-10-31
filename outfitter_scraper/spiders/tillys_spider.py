@@ -1,6 +1,12 @@
+# -*- coding: utf-8 -*-
+
+# Class responsible for crawling 'www.tillys.com' for image urls.
+
 from scrapy.linkextractors import LinkExtractor
 from scrapy.spiders import CrawlSpider, Rule
+from ..items import OutfitterScraperItem, Clothing
 import re
+
         
 class TillysSpider(CrawlSpider):
     name = 'tillys'
@@ -18,16 +24,19 @@ class TillysSpider(CrawlSpider):
         return self.parse_catalog_page(response)
 
     def parse_catalog_page(self, response):
-        # extract clothing type from response url
+        item = OutfitterScraperItem()
+        
+        item['source_url'] = response.url
+
         clothing_match = re.search(r'clothing/(.+)/', response.url)
-        clothing = clothing_match.group(1) if clothing_match else 'unknown'
+        if clothing_match:
+            captured = clothing_match.group(1)
+            item['clothing'] = {
+                'shorts': Clothing.SHORTS,
+                't-shirts': Clothing.T_SHIRTS
+            }.get(captured, Clothing.UNKNOWN)
 
-        # extract image urls
         selected_urls = response.css('.prod-thumb-image::attr(data-yo-src)')
-        img_urls = selected_urls.extract()
+        item['img_urls'] = selected_urls.extract()
 
-        return {
-            'page_url': response.url,
-            'clothing': clothing,
-            'img_urls': img_urls
-        }
+        return item
