@@ -34,7 +34,7 @@ class TillysSpider(CrawlSpider):
             item['clothing'] = {
                 't-shirts': 'tops',
                 'shorts': 'bottoms'
-            }.get(captured)
+            }.get(captured, 'unknown')
 
         item['image_urls'] = response \
             .css('.prod-thumb-image::attr(data-yo-src)') \
