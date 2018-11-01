@@ -22,5 +22,5 @@ similar to the following:
 23M     images
 ```
 
-The above output shows the number of storage space consumed by scraped images 
+The above output shows the amount of storage space consumed by scraped images 
 of each respective clothing type (i.e, tops and bottoms).
