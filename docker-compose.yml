@@ -5,3 +5,9 @@ services:
   outfitter_scraper:
     container_name: outfitter_scraper
     build: .
+    volumes:
+      - images:/images
+
+volumes:
+
+  images:

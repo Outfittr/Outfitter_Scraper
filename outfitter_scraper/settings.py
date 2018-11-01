@@ -91,4 +91,4 @@ ITEM_PIPELINES = {
 #HTTPCACHE_STORAGE = 'scrapy.extensions.httpcache.FilesystemCacheStorage'
 
 # Image pipeline settings
-IMAGES_STORE = 'downloaded'
+IMAGES_STORE = '/images'
