@@ -17,7 +17,6 @@ run the project at least once. Then, execute: `./test.sh`. You should see output
 similar to the following:
 
 ```
-(outfitter_scraper) ❯ ./test.sh
 20M     images/tops
 3.3M    images/bottoms
 23M     images
