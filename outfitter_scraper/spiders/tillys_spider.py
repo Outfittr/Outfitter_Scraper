@@ -28,23 +28,24 @@ class TillysSpider(CrawlSpider):
     def parse_catalog_page(self, response):
         item = OutfitterScraperItem()
         
+        # determine the type of clothing shown on the page
         clothing_match = re.search(r'clothing/(.+)/', response.url)
         if clothing_match:
-            captured = clothing_match.group(1)
-            clothing = {
+            captured = clothing_match.group(1)         
+            item['clothing'] = {
                 't-shirts': 'tops',
                 'shorts': 'bottoms'
             }.get(captured, 'unknown')
-            item['clothing'] = clothing
 
+        # parse attributes from each image
         item['image_names'] = []
         item['image_urls'] = []
-        for image in response.css('.prod-thumb-image'):
-            title = image.xpath('@title').extract_first()
-            url = image.xpath('@data-yo-src').extract_first()
+        for image in response.css('.prod-thumb-image'):        
+            title = image.xpath('@title')
+            url = image.xpath('@data-yo-src')
             if not url:
-                url = image.xpath('@src').extract_first()      
-            item['image_names'].append(title)
-            item['image_urls'].append(url)
+                url = image.xpath('@src')
+            item['image_names'].append(title.extract_first())
+            item['image_urls'].append(url.extract_first())
 
         return item
