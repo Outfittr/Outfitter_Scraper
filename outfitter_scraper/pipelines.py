@@ -21,12 +21,14 @@ class DefaultValuesPipeline(object):
 
 class StoreImagesPipeline(ImagesPipeline):
     def get_media_requests(self, item, info):
-        for image_url in item['image_urls']:
-            request = scrapy.Request(image_url)
+        for name, url in zip(item['image_names'], item['image_urls']):
+            request = scrapy.Request(url)
+            request.meta['name'] = name
             request.meta['clothing'] = item['clothing']
             yield request
     
     def file_path(self, request, response=None, info=None):
-        filename = hashlib.sha1(to_bytes(request.url)).hexdigest()
-        subdir = request.meta['clothing']
-        return '{}/{}.jpg'.format(subdir, filename)
+        clothing = request.meta['clothing']
+        name = request.meta['name']
+        hashed_name = hashlib.sha1(to_bytes(name)).hexdigest()
+        return '{}/{}.jpg'.format(clothing, hashed_name)

@@ -10,5 +10,6 @@ import scrapy
 
 class OutfitterScraperItem(scrapy.Item):
     clothing = scrapy.Field()
+    image_names = scrapy.Field()
     image_urls = scrapy.Field()
     images = scrapy.Field()

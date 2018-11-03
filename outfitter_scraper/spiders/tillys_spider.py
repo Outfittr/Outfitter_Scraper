@@ -31,13 +31,20 @@ class TillysSpider(CrawlSpider):
         clothing_match = re.search(r'clothing/(.+)/', response.url)
         if clothing_match:
             captured = clothing_match.group(1)
-            item['clothing'] = {
+            clothing = {
                 't-shirts': 'tops',
                 'shorts': 'bottoms'
             }.get(captured, 'unknown')
+            item['clothing'] = clothing
 
-        item['image_urls'] = response \
-            .css('.prod-thumb-image::attr(data-yo-src)') \
-            .extract()
+        item['image_names'] = []
+        item['image_urls'] = []
+        for image in response.css('.prod-thumb-image'):
+            title = image.xpath('@title').extract_first()
+            url = image.xpath('@data-yo-src').extract_first()
+            if not url:
+                url = image.xpath('@src').extract_first()      
+            item['image_names'].append(title)
+            item['image_urls'].append(url)
 
         return item
