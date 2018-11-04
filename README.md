@@ -2,7 +2,8 @@
 
 ## About
 
-This is a work in progress.
+A collection of image scraping spiders intended to collect and categorize 
+clothing images from various online retailers.
 
 ## Usage
 
