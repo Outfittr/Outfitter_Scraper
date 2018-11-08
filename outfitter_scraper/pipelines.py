@@ -6,6 +6,8 @@
 # See: https://doc.scrapy.org/en/latest/topics/item-pipeline.html
 
 import hashlib
+import logging
+import re
 
 import scrapy
 from scrapy.pipelines.images import ImagesPipeline
@@ -21,7 +23,12 @@ class DefaultValuesPipeline(object):
 class StoreImagesPipeline(ImagesPipeline):
     def get_media_requests(self, item, info):
         for image_item in item['image_items']:
-            request = scrapy.Request(image_item['url'])
+            request = None
+            try:
+                request = scrapy.Request(image_item['url'])
+            except ValueError as value_error:
+                logging.log(logging.ERROR, value_error)
+                continue
             request.meta['title'] = image_item['title']
             request.meta['clothing'] = item['clothing']
             yield request
