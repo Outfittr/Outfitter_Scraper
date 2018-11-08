@@ -6,7 +6,6 @@
 # See: https://doc.scrapy.org/en/latest/topics/item-pipeline.html
 
 import hashlib
-import re
 
 import scrapy
 from scrapy.pipelines.images import ImagesPipeline
@@ -16,14 +15,6 @@ from scrapy.utils.python import to_bytes
 class DefaultValuesPipeline(object):
     def process_item(self, item, spider):
         item.setdefault('clothing', 'unknown')
-        return item
-        
-
-class MissingProtocolFilterPipeline(object):
-    def process_item(self, item, spider):
-        item['image_items'] = [image_item for 
-                               image_item in item['image_items'] 
-                               if re.match(r'https?://.+', image_item['url'])]
         return item
 
 
