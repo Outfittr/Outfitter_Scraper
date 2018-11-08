@@ -30,4 +30,5 @@ class StoreImagesPipeline(ImagesPipeline):
         hash = lambda x: hashlib.sha1(to_bytes(x)).hexdigest()
         return '{}/{}.jpg'.format(
             request.meta['clothing'], 
-            hash(request.meta['title']))
+            hash(request.meta['title'])
+        )
