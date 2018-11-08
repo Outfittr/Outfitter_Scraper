@@ -6,9 +6,9 @@
 # See: https://doc.scrapy.org/en/latest/topics/item-pipeline.html
 
 import hashlib
+import re
 
 import scrapy
-from scrapy.exceptions import DropItem
 from scrapy.pipelines.images import ImagesPipeline
 from scrapy.utils.python import to_bytes
 
@@ -17,18 +17,26 @@ class DefaultValuesPipeline(object):
     def process_item(self, item, spider):
         item.setdefault('clothing', 'unknown')
         return item
+        
+
+class MissingProtocolFilterPipeline(object):
+    def process_item(self, item, spider):
+        item['image_items'] = [image_item for 
+                               image_item in item['image_items'] 
+                               if re.match(r'https?://.+', image_item['url'])]
+        return item
 
 
 class StoreImagesPipeline(ImagesPipeline):
     def get_media_requests(self, item, info):
-        for name, url in zip(item['image_names'], item['image_urls']):
-            request = scrapy.Request(url)
-            request.meta['name'] = name
+        for image_item in item['image_items']:
+            request = scrapy.Request(image_item['url'])
+            request.meta['title'] = image_item['title']
             request.meta['clothing'] = item['clothing']
             yield request
     
     def file_path(self, request, response=None, info=None):
-        clothing = request.meta['clothing']
-        name = request.meta['name']
-        hashed_name = hashlib.sha1(to_bytes(name)).hexdigest()
-        return '{}/{}.jpg'.format(clothing, hashed_name)
+        hash = lambda x: hashlib.sha1(to_bytes(x)).hexdigest()
+        return '{}/{}.jpg'.format(
+            request.meta['clothing'], 
+            hash(request.meta['title']))

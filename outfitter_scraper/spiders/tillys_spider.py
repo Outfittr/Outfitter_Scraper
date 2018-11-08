@@ -38,14 +38,15 @@ class TillysSpider(CrawlSpider):
             }.get(captured, 'unknown')
 
         # parse attributes from each image
-        item['image_names'] = []
-        item['image_urls'] = []
-        for image in response.css('.prod-thumb-image'):        
-            title = image.xpath('@title')
-            url = image.xpath('@data-yo-src')
+        item['image_items'] = []
+        for thumb in response.css('.prod-thumb-image'):        
+            title = thumb.xpath('@title')
+            url = thumb.xpath('@data-yo-src')
             if not url:
-                url = image.xpath('@src')
-            item['image_names'].append(title.extract_first())
-            item['image_urls'].append(url.extract_first())
+                url = thumb.xpath('@src')
+            item['image_items'].append({
+                'title': title.extract_first(),
+                'url': url.extract_first()
+            })
 
         return item
