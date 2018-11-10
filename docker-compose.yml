@@ -1,0 +1,13 @@
+version: "2"
+
+services:
+
+  outfittr_scraper:
+    container_name: outfittr_scraper
+    build: .
+    volumes:
+      - images:/images
+
+volumes:
+
+  images:
