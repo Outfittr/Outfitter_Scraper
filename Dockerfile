@@ -1,6 +1,6 @@
 FROM python:3.7
 
-WORKDIR /usr/src/outfitter_scraper
+WORKDIR /usr/src/outfittr_scraper
 
 # Setup dependencies
 COPY Pipfile .
@@ -9,7 +9,7 @@ RUN pip install pipenv
 RUN pipenv install --system --deploy
 
 # Copy necessary source files
-COPY outfitter_scraper outfitter_scraper
+COPY outfittr_scraper outfittr_scraper
 COPY scrapy.cfg .
 
 # Run all of the scrapers

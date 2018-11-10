@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Scrapy settings for outfitter_scraper project
+# Scrapy settings for outfittr_scraper project
 #
 # For simplicity, this file contains only settings considered important or
 # commonly used. You can find more settings consulting the documentation:
@@ -9,14 +9,14 @@
 #     https://doc.scrapy.org/en/latest/topics/downloader-middleware.html
 #     https://doc.scrapy.org/en/latest/topics/spider-middleware.html
 
-BOT_NAME = 'outfitter_scraper'
+BOT_NAME = 'outfittr_scraper'
 
-SPIDER_MODULES = ['outfitter_scraper.spiders']
-NEWSPIDER_MODULE = 'outfitter_scraper.spiders'
+SPIDER_MODULES = ['outfittr_scraper.spiders']
+NEWSPIDER_MODULE = 'outfittr_scraper.spiders'
 
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
-#USER_AGENT = 'outfitter_scraper (+http://www.yourdomain.com)'
+#USER_AGENT = 'outfittr_scraper (+http://www.yourdomain.com)'
 
 # Obey robots.txt rules
 ROBOTSTXT_OBEY = False
@@ -47,13 +47,13 @@ ROBOTSTXT_OBEY = False
 # Enable or disable spider middlewares
 # See https://doc.scrapy.org/en/latest/topics/spider-middleware.html
 #SPIDER_MIDDLEWARES = {
-#    'outfitter_scraper.middlewares.OutfitterScraperSpiderMiddleware': 543,
+#    'outfittr_scraper.middlewares.outfittrScraperSpiderMiddleware': 543,
 #}
 
 # Enable or disable downloader middlewares
 # See https://doc.scrapy.org/en/latest/topics/downloader-middleware.html
 #DOWNLOADER_MIDDLEWARES = {
-#    'outfitter_scraper.middlewares.OutfitterScraperDownloaderMiddleware': 543,
+#    'outfittr_scraper.middlewares.outfittrScraperDownloaderMiddleware': 543,
 #}
 
 # Enable or disable extensions
@@ -65,8 +65,8 @@ ROBOTSTXT_OBEY = False
 # Configure item pipelines
 # See https://doc.scrapy.org/en/latest/topics/item-pipeline.html
 ITEM_PIPELINES = {
-    'outfitter_scraper.pipelines.DefaultValuesPipeline': 100,
-    'outfitter_scraper.pipelines.StoreImagesPipeline': 200
+    'outfittr_scraper.pipelines.DefaultValuesPipeline': 100,
+    'outfittr_scraper.pipelines.StoreImagesPipeline': 200
 }
 
 # Enable and configure the AutoThrottle extension (disabled by default)

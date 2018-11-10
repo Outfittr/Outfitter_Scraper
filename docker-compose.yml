@@ -2,8 +2,8 @@ version: "2"
 
 services:
 
-  outfitter_scraper:
-    container_name: outfitter_scraper
+  outfittr_scraper:
+    container_name: outfittr_scraper
     build: .
     volumes:
       - images:/images

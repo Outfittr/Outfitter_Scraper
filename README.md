@@ -1,4 +1,4 @@
-# Outfitter Scraper
+# Outfittr Scraper
 
 ## About
 

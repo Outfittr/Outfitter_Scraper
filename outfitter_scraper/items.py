@@ -8,7 +8,7 @@
 import scrapy
 
 
-class OutfitterScraperItem(scrapy.Item):
+class OutfittrScraperItem(scrapy.Item):
     clothing = scrapy.Field()
     image_items = scrapy.Field()
     images = scrapy.Field()

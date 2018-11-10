@@ -4,7 +4,7 @@
 
 import re
 
-from ..items import OutfitterScraperItem
+from ..items import OutfittrScraperItem
 
 from scrapy.linkextractors import LinkExtractor
 from scrapy.spiders import CrawlSpider, Rule
@@ -26,7 +26,7 @@ class TillysSpider(CrawlSpider):
         return self.parse_catalog_page(response)
 
     def parse_catalog_page(self, response):
-        item = OutfitterScraperItem()
+        item = OutfittrScraperItem()
         
         # determine the type of clothing shown on the page
         clothing_match = re.search(r'clothing/(.+)/', response.url)
